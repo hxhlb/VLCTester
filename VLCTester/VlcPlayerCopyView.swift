@@ -28,8 +28,11 @@ class VlcPlayerCopyView: UIView, VLCMediaPlayerDelegate
             playerStateChangedNotification = NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: VLCMediaPlayerStateChanged), object: mediaPlayer, queue: nil,
                                    using: self.playerStateChanged)
 
-            mediaPlayer.audio.isMuted = true
-            mediaPlayer.play()
+            // Banana: Fix build error
+            if let audio = mediaPlayer.audio {
+                audio.isMuted = true
+                mediaPlayer.play()
+            }
         }
     }
     

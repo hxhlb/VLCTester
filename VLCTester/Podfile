@@ -1,7 +1,9 @@
-source 'https://github.com/CocoaPods/Specs.git'
-project '/Users/ShayBC/dev/tvos/VLCTester/VLCTester.xcodeproj'
+# upgrade to newest
+
+#source 'https://github.com/CocoaPods/Specs.git'
+project '../VLCTester.xcodeproj'
 target 'VLCTester' do
-    platform :tvos, '10.2'
-    pod 'TVVLCKit', '~>3.3.0'
+    platform :tvos, '15.2'
+    pod 'TVVLCKit'#, '~>3.4.0'
 end
 

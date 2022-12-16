@@ -35,10 +35,13 @@ struct VideoProgressBar: View {
             // if play was pressed after skimming, then set player new time to the milliseconds the user skimmed to
             if(slideTo != 0)
             {
-                Config.player?.mediaPlayer.time = Config.playerCopy?.mediaPlayer.time // set play position to new milliseconds
-                player.currentTimeString = Config.playerCopy!.mediaPlayer.time.stringValue // set new time string
-                player.videoCurrentTime = Config.playerCopy!.mediaPlayer.time.intValue // set new time int
-                player.percentagePlayedSoFar = Float(player.videoCurrentTime) / Float(player.videoLength) // set percentage played so far
+                // Banana: Fix build error
+                if let mediaPlayer = Config.playerCopy?.mediaPlayer {
+                    Config.player?.mediaPlayer.time = mediaPlayer.time // set play position to new milliseconds
+                    player.currentTimeString = mediaPlayer.time.stringValue // set new time string
+                    player.videoCurrentTime = mediaPlayer.time.intValue // set new time int
+                    player.percentagePlayedSoFar = Float(player.videoCurrentTime) / Float(player.videoLength) // set percentage played so far
+                }
             }
 
             Config.player?.startPlayer()

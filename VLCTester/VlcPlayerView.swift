@@ -54,9 +54,11 @@ class VlcPlayerView: UIView, VLCMediaPlayerDelegate, ObservableObject
     
     public func startPlayer()
     {
-        mediaPlayer.audio.isMuted = false
-        mediaPlayer.audio.volume = 100
-        mediaPlayer.play()
+        if let audio = mediaPlayer.audio {
+            audio.isMuted = false
+            audio.volume = 100
+            mediaPlayer.play()
+        }
     }
 
     public func stopPlayer()
@@ -76,8 +78,11 @@ class VlcPlayerView: UIView, VLCMediaPlayerDelegate, ObservableObject
     
     func playerStateChanged(_ notification: Notification)
     {
-        videoLength = mediaPlayer.media.length.intValue
-        videoLengthString = mediaPlayer.media.length.stringValue
+        // Banana: Fix build error
+        if let media = mediaPlayer.media {
+            videoLength = media.length.intValue
+            videoLengthString = media.length.stringValue
+        }
     }
     
     func playerTimeChanged(_ notification: Notification)
